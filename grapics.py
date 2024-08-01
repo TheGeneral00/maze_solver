@@ -60,6 +60,7 @@ class Cell:
         self._x2 = None
         self._y2 = None
         self._win = win
+        self._visited = False
 
     def draw(self, x1, y1, x2, y2):
         #initializing coordinates of the Cell
@@ -72,16 +73,31 @@ class Cell:
         if self.has_left_wall == True:
             line = Line(Point(x1, y1), Point(x1, y2))
             self._win.draw_line(line)
+        else:
+            line = Line(Point(x1, y1), Point(x1, y2))
+            self._win.draw_line(line, fill_color='black')
+        
         if self.has_right_wall == True:
             line = Line(Point(x2, y1), Point(x2, y2))
             self._win.draw_line(line) 
+        else:
+            line = Line(Point(x2, y1), Point(x2, y2))
+            self._win.draw_line(line, fill_color='black')
+        
         if self.has_top_wall == True:
             line = Line(Point(x1, y1), Point(x2, y1))
             self._win.draw_line(line)
+        else:
+            line = Line(Point(x1, y1), Point(x2, y1))
+            self._win.draw_line(line, fill_color='black')
+        
         if self.has_bottom_wall == True:
             line = Line(Point(x1, y2), Point(x2, y2))
             self._win.draw_line(line)
-
+        else:
+            line = Line(Point(x1, y2), Point(x2, y2))
+            self._win.draw_line(line, fill_color='black') 
+    
     def draw_move(self, to_cell, undo=False):
         center1 = Point(self._x1 + (self._x2 - self._x1)/2, self._y1 + (self._y2-self._y1)/2)
         center2 = Point(to_cell._x1 + (to_cell._x2 - to_cell._x1)/2, to_cell._y1 + (to_cell._y2-to_cell._y1)/2)

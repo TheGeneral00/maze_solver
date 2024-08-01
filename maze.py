@@ -2,7 +2,7 @@ from grapics import *
 import time
 
 class Maze:
-    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None):
+    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None, seed=None):
         self._cells = []
         self._x1 = x1
         self._y1 = y1
@@ -11,8 +11,11 @@ class Maze:
         self._cell_size_x = cell_size_x
         self._cell_size_y = cell_size_y
         self._win = win
+        if seed != None:
+            self._seed = seed
         
         self._create_cells()
+        self._break_entrance_and_exit()
     
     #populating the self._cells list and drawing the cells on canvas
     def _create_cells(self):
@@ -42,4 +45,10 @@ class Maze:
             return
         self._win.redraw()
         time.sleep(0.05)
-
+    
+    #setting predefined entrance and exit visualy
+    def _break_entrance_and_exit(self):
+        self._cells[0][0].has_top_wall = False
+        self._draw_cell(0, 0)
+        self._cells[self._num_colls-1][self._num_rows-1].has_bottom_wall = False
+        self._draw_cell(self._num_colls-1, self._num_rows-1)
