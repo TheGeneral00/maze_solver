@@ -42,11 +42,11 @@ class Point:
         self.y = y
 
 class Line:
-    def __init__(self, point1, point2):
+    def __init__(self, point1: Point, point2: Point):
         self.point1 = point1
         self.point2 = point2
 
-    def draw(self, canvas, fill_color):
+    def draw(self, canvas, fill_color='white'):
         canvas.create_line(self.point1.x, self.point1.y, self.point2.x, self.point2.y, fill=fill_color, width=2)
 
 class Cell:
@@ -81,4 +81,13 @@ class Cell:
         if self.has_bottom_wall == True:
             line = Line(Point(x1, y2), Point(x2, y2))
             self._win.draw_line(line)
+
+    def draw_move(self, to_cell, undo=False):
+        center1 = Point(self._x1 + (self._x2 - self._x1)/2, self._y1 + (self._y2-self._y1)/2)
+        center2 = Point(to_cell._x1 + (to_cell._x2 - to_cell._x1)/2, to_cell._y1 + (to_cell._y2-to_cell._y1)/2)
+        line = Line(center1, center2)
+        if undo != False:
+            self._win.draw_line(line, fill_color='gray')
+        else:
+            self._win.draw_line(line, fill_color='red')
 
