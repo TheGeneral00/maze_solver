@@ -106,4 +106,3 @@ class Cell:
             self._win.draw_line(line, fill_color='gray')
         else:
             self._win.draw_line(line, fill_color='red')
-
