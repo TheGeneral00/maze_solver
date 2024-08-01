@@ -13,8 +13,8 @@ class Window:
         self.__root.title('Maze Solver')
         
         #creating canvas for drawing graphics
-        self.canvas = Canvas(self.__root, { 'bg': 'black'})
-        self.canvas.pack()
+        self.canvas = Canvas(self.__root, { 'bg': 'black', 'height': height, 'width': width})
+        self.canvas.pack(fill= BOTH, expand=1)
         
         self.__root.protocol('WM_DELETE_WINDOW', self.close)
         
